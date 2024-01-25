@@ -1,0 +1,35 @@
+<%- include("header") -%>
+
+<div class="box" id="heading">
+<% if (listTitle === "Work List") { %> <!-- Check if the listTitle is "Work List" -->
+<h1 class="work-list"> </h1> <!-- Add a CSS class "work-list" -->
+<% } else { %>
+<h1> <%= listTitle %> </h1>
+<% } %>
+<h1><%= weatherData.currentDate %></h1>
+<h2><%= Math.floor(weatherData.temperature) %>°C 
+  <img src="<%= weatherData.iconURL %>"></h2>
+</div>
+
+    <div class="box">
+        <% for (var i=0; i<newListItems.length; i++) { %>
+          <div class="item">
+            <input type="checkbox">
+            <p><%= newListItems[i] %></p>
+          </div>
+        <% } %>
+
+         <form class="item" action="/" method="post">  <!--hit the submit button it's going to make a post request to the home route. -->
+          <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+          <button type="submit" name="list" value="<%= listTitle %>">+</button>
+        </form>
+
+        <% if (listTitle !== "Work List") { %> <!-- Add this condition to show the button only if it's not the work list page -->
+        <div class="work-list-button">
+          <a href="/work" class="work-list-link">Go to Work List</a>
+        </div>
+      <% } %>
+    </div>
+
+
+<%- include("footer") -%>
